@@ -11,14 +11,15 @@ sudo mv -v lein /usr/bin/lein
 #DOWNLOAD JAVA8
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get -y update
-#AUTO ACCEPT Oracle's EULA
-echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+#sudo apt-get -y install oracle-java8-installer
+echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | su
+do /usr/bin/debconf-set-selections
 sudo apt-get -y install oracle-java8-installer
 
 sudo apt-get -y update
 sudo apt-get -y install python-pip
 sudo pip install -q streamparse
 
-#Make example for user
+sudo sed -i '8s/^$/export LEIN_ROOT="True"/' /usr/bin/lein
 streamparse quickstart WordCountExample
 ~                                         
